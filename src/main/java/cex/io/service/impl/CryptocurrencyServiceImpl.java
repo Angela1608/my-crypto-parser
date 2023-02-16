@@ -1,19 +1,19 @@
-package cex.io.controller;
+package cex.io.service.impl;
 
 import cex.io.dto.ApiResponseDto;
 import cex.io.repository.CryptocurrencyRepository;
+import cex.io.service.CryptocurrencyService;
 import cex.io.service.HttpClient;
 import cex.io.service.mapper.ApiResponseDtoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/cryptocurrencies")
+@Service
 @AllArgsConstructor
-public class CryptocurrencyController {
+public class CryptocurrencyServiceImpl implements CryptocurrencyService {
     private static final String LAST_PRICE_BTC_USD = "https://cex.io/api/last_price/BTC/USD";
     private static final String LAST_PRICE_ETH_USD = "https://cex.io/api/last_price/ETH/USD";
     private static final String LAST_PRICE_XRP_USD = "https://cex.io/api/last_price/XRP/USD";
@@ -22,8 +22,8 @@ public class CryptocurrencyController {
     private final ApiResponseDtoMapper apiResponseDtoMapper;
 
     @Scheduled(fixedDelay = 10000)
-    @PostMapping
-    public void saveDatatoDb() {
+    @Override
+    public void parseAndSave() {
         ApiResponseDto btcDto =
                 httpClient.get(LAST_PRICE_BTC_USD, ApiResponseDto.class);
         ApiResponseDto ethDto =
@@ -38,4 +38,3 @@ public class CryptocurrencyController {
                 .forEach(repository::save);
     }
 }
-
