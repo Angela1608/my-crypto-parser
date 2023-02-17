@@ -44,7 +44,7 @@ public class CryptocurrencyServiceImpl implements CryptocurrencyService {
     @Override
     public Cryptocurrency getWithLowestPrice(String cryptocurrencyName) {
         return Optional
-                .ofNullable(repository.findFirstByCryptoCurrencyNameOrderByPriceAsc(cryptocurrencyName))
+                .ofNullable(repository.findFirstByCryptocurrencyNameOrderByPriceAsc(cryptocurrencyName))
                 .orElseThrow(() -> new RuntimeException(
                         "Incorrect cryptocurrency. Please choose BTC, ETH or XR"));
     }
@@ -52,7 +52,7 @@ public class CryptocurrencyServiceImpl implements CryptocurrencyService {
     @Override
     public Cryptocurrency getWithHighestPrice(String cryptocurrencyName) {
         return Optional
-                .ofNullable(repository.findFirstByCryptoCurrencyOrderByPriceDesc(cryptocurrencyName))
+                .ofNullable(repository.findFirstByCryptocurrencyNameOrderByPriceDesc(cryptocurrencyName))
                 .orElseThrow(() -> new RuntimeException(
                         "Incorrect cryptocurrency. Please choose BTC, ETH or XR"));
     }
@@ -60,7 +60,7 @@ public class CryptocurrencyServiceImpl implements CryptocurrencyService {
     @Override
     public List<Cryptocurrency> getAllByName(String cryptocurrencyName, PageRequest pageRequest) {
         return Optional
-                .ofNullable(repository.findAllByCryptoCurrencyName(cryptocurrencyName, pageRequest))
+                .ofNullable(repository.findAllByCryptocurrencyName(cryptocurrencyName, pageRequest))
                 .orElseThrow(() -> new RuntimeException(
                         "Incorrect cryptocurrency. Please choose BTC, ETH or XR"));
     }

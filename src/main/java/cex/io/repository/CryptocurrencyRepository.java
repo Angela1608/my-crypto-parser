@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface CryptocurrencyRepository extends MongoRepository<Cryptocurrency, String> {
-    Cryptocurrency findFirstByCryptoCurrencyNameOrderByPriceAsc(String cryptocurrencyName);
+    Cryptocurrency findFirstByCryptocurrencyNameOrderByPriceAsc(String cryptocurrencyName);
 
-    Cryptocurrency findFirstByCryptoCurrencyOrderByPriceDesc(String cryptocurrencyName);
+    Cryptocurrency findFirstByCryptocurrencyNameOrderByPriceDesc(String cryptocurrencyName);
 
-    List<Cryptocurrency> findAllByCryptoCurrencyName(String cryptocurrencyName, Pageable pageable);
+    List<Cryptocurrency> findAllByCryptocurrencyName(String cryptocurrencyName, Pageable pageable);
 }
