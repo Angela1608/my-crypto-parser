@@ -1,7 +1,6 @@
 package cex.io.dto;
 
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
 @Data

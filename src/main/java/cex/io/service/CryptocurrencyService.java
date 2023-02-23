@@ -2,7 +2,6 @@ package cex.io.service;
 
 import cex.io.model.Cryptocurrency;
 import org.springframework.data.domain.PageRequest;
-
 import java.util.List;
 
 public interface CryptocurrencyService {
