@@ -19,6 +19,7 @@ public class CryptocurrencyServiceImpl implements CryptocurrencyService {
     private static final String LAST_PRICE_BTC_USD = "https://cex.io/api/last_price/BTC/USD";
     private static final String LAST_PRICE_ETH_USD = "https://cex.io/api/last_price/ETH/USD";
     private static final String LAST_PRICE_XRP_USD = "https://cex.io/api/last_price/XRP/USD";
+    private static final String MESSAGE = "Incorrect cryptocurrency. Please choose BTC, ETH or XR";
     private final CryptocurrencyRepository repository;
     private final HttpClient httpClient;
     private final ResponseDtoMapper apiResponseDtoMapper;
@@ -43,24 +44,24 @@ public class CryptocurrencyServiceImpl implements CryptocurrencyService {
     @Override
     public Cryptocurrency getWithLowestPrice(String cryptocurrencyName) {
         return Optional
-                .ofNullable(repository.findFirstByCryptocurrencyNameOrderByPriceAsc(cryptocurrencyName))
-                .orElseThrow(() -> new RuntimeException(
-                        "Incorrect cryptocurrency. Please choose BTC, ETH or XR"));
+                .ofNullable(repository
+                        .findFirstByCryptocurrencyNameOrderByPriceAsc(cryptocurrencyName))
+                .orElseThrow(() -> new RuntimeException(MESSAGE));
     }
 
     @Override
     public Cryptocurrency getWithHighestPrice(String cryptocurrencyName) {
         return Optional
-                .ofNullable(repository.findFirstByCryptocurrencyNameOrderByPriceDesc(cryptocurrencyName))
-                .orElseThrow(() -> new RuntimeException(
-                        "Incorrect cryptocurrency. Please choose BTC, ETH or XR"));
+                .ofNullable(repository
+                        .findFirstByCryptocurrencyNameOrderByPriceDesc(cryptocurrencyName))
+                .orElseThrow(() -> new RuntimeException(MESSAGE));
     }
 
     @Override
     public List<Cryptocurrency> getAllByName(String cryptocurrencyName, PageRequest pageRequest) {
         return Optional
-                .ofNullable(repository.findAllByCryptocurrencyName(cryptocurrencyName, pageRequest))
-                .orElseThrow(() -> new RuntimeException(
-                        "Incorrect cryptocurrency. Please choose BTC, ETH or XR"));
+                .ofNullable(repository
+                        .findAllByCryptocurrencyName(cryptocurrencyName, pageRequest))
+                .orElseThrow(() -> new RuntimeException(MESSAGE));
     }
 }
