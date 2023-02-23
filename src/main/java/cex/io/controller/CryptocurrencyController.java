@@ -3,6 +3,7 @@ package cex.io.controller;
 import cex.io.dto.CryptocurrencyResponseDto;
 import cex.io.model.Cryptocurrency;
 import cex.io.service.CryptocurrencyService;
+import cex.io.service.CsvService;
 import cex.io.service.mapper.ResponseDtoMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -21,30 +22,37 @@ import java.util.stream.Collectors;
 public class CryptocurrencyController {
     private final CryptocurrencyService cryptoService;
     private final ResponseDtoMapper mapper;
+    private final CsvService csvService;
 
-    @GetMapping("/max-price")
-    public CryptocurrencyResponseDto getByMinPrice(@RequestParam String cryptocurrencyName) {
-        Cryptocurrency cryptocurrency = cryptoService.getWithLowestPrice(cryptocurrencyName);
+    @GetMapping("/minprice")
+    public CryptocurrencyResponseDto getByMinPrice(@RequestParam String name) {
+        Cryptocurrency cryptocurrency = cryptoService.getWithLowestPrice(name.toUpperCase());
         return mapper.toDto(cryptocurrency);
     }
 
-    @GetMapping("/min-price")
-    public CryptocurrencyResponseDto getByMaxPrice(@RequestParam String cryptocurrencyName) {
-        Cryptocurrency cryptocurrency = cryptoService.getWithHighestPrice(cryptocurrencyName);
+    @GetMapping("/maxprice")
+    public CryptocurrencyResponseDto getByMaxPrice(@RequestParam String name) {
+        Cryptocurrency cryptocurrency = cryptoService.getWithHighestPrice(name.toUpperCase());
         return mapper.toDto(cryptocurrency);
     }
 
     @GetMapping()
-    public List<CryptocurrencyResponseDto> getAll(@RequestParam(defaultValue = "20") Integer count,
+    public List<CryptocurrencyResponseDto> getAll(@RequestParam(defaultValue = "20") Integer size,
                                                   @RequestParam(defaultValue = "0") Integer page,
                                                   @RequestParam(defaultValue = "price") String sortBy,
-                                                  @RequestParam String cryptocurrencyName) {
+                                                  @RequestParam String name) {
         Sort sort = Sort.by(sortBy);
-        PageRequest pageRequest = PageRequest.of(page, count, sort);
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
         return cryptoService
-                .getAllByName(cryptocurrencyName, pageRequest)
+                .getAllByName(name, pageRequest)
                 .stream()
                 .map(mapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/csv")
+    String getCsv() {
+        csvService.createCSVReport();
+        return "Csv report is successfully created!";
     }
 }

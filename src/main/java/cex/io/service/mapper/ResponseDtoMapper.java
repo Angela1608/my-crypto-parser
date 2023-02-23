@@ -18,12 +18,12 @@ public class ResponseDtoMapper {
         return cryptocurrency;
     }
 
-    public CryptocurrencyResponseDto toDto(Cryptocurrency cryptocurrency) {
+    public CryptocurrencyResponseDto toDto(Cryptocurrency cryptoCurrency) {
         CryptocurrencyResponseDto responseDto = new CryptocurrencyResponseDto();
-        responseDto.setCreatedAt(cryptocurrency.getCreatedAt());
-        responseDto.setCryptocurrencyName(cryptocurrency.getCryptocurrencyName());
-        responseDto.setCurrencyName(cryptocurrency.getCurrencyName());
-        responseDto.setPrice(cryptocurrency.getPrice());
+        responseDto.setCreatedAt(cryptoCurrency.getCreatedAt());
+        responseDto.setCryptocurrencyName(cryptoCurrency.getCryptocurrencyName());
+        responseDto.setCurrencyName(cryptoCurrency.getCurrencyName());
+        responseDto.setPrice(cryptoCurrency.getPrice());
         return responseDto;
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CryptocurrencyRepository extends MongoRepository<Cryptocurrency, String> {
+public interface CryptocurrencyRepository extends MongoRepository<Cryptocurrency, Long> {
     Cryptocurrency findFirstByCryptocurrencyNameOrderByPriceAsc(String cryptocurrencyName);
 
     Cryptocurrency findFirstByCryptocurrencyNameOrderByPriceDesc(String cryptocurrencyName);
