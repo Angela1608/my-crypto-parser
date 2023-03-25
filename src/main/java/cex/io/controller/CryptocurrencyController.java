@@ -3,8 +3,10 @@ package cex.io.controller;
 import cex.io.dto.CryptocurrencyResponseDto;
 import cex.io.model.Cryptocurrency;
 import cex.io.service.CryptocurrencyService;
-import cex.io.service.CsvService;
+import cex.io.service.impl.CsvServiceImpl;
 import cex.io.service.mapper.ResponseDtoMapper;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cryptocurrencies")
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class CryptocurrencyController {
     private final CryptocurrencyService cryptoService;
     private final ResponseDtoMapper mapper;
-    private final CsvService csvService;
+    private final CsvServiceImpl csvServiceImpl;
 
     @GetMapping("/minprice")
     public CryptocurrencyResponseDto getByMinPrice(@RequestParam String name) {
@@ -51,7 +51,7 @@ public class CryptocurrencyController {
 
     @GetMapping("/csv")
     String getCsv() {
-        csvService.createCSVReport();
+        csvServiceImpl.createCSVReport();
         return "Csv report is successfully created!";
     }
 }

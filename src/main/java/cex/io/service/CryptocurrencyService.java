@@ -1,8 +1,8 @@
 package cex.io.service;
 
 import cex.io.model.Cryptocurrency;
-import org.springframework.data.domain.PageRequest;
 import java.util.List;
+import org.springframework.data.domain.PageRequest;
 
 public interface CryptocurrencyService {
     void parseAndSave();

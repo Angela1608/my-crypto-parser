@@ -8,7 +8,7 @@
         <version>2.7.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
+    <groupId>diamond</groupId>
     <artifactId>crypto-parser</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>crypto-parser</name>
@@ -49,7 +49,6 @@
             <artifactId>commons-csv</artifactId>
             <version>1.10.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
