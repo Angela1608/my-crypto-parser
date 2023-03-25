@@ -3,8 +3,8 @@ package cex.io.service.mapper;
 import cex.io.dto.ApiResponseDto;
 import cex.io.dto.CryptocurrencyResponseDto;
 import cex.io.model.Cryptocurrency;
-import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ResponseDtoMapper {
